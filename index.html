@@ -244,16 +244,43 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-lg);
+      aspect-ratio: 51 / 36;
       width: 100%;
       margin-bottom: 12px;
       box-shadow: var(--shadow-soft);
       background: #d8d8d8;
     }
 
-    .project-card__media img:not(.project-card__award) {
+    .project-card__media > :is(img, video):not(.project-card__award):not(.project-card__poster):not(.project-card__video) {
       position: static;
       width: 100%;
-      height: auto;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .project-card__poster,
+    .project-card__video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-card__video {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .project-card__media--luminous.is-video-visible .project-card__video {
+      opacity: 1;
+    }
+
+    .project-card__media--luminous.is-video-visible:hover .project-card__video {
+      opacity: 0;
     }
 
     .project-card__award {
@@ -530,8 +557,11 @@
 
           <article class="project-card">
             <a class="project-card__link" href="https://www.behance.net/gallery/215296101/Luminous-Labs-Brand-Identity-Website" target="_blank" rel="noreferrer">
-              <figure class="project-card__media">
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 720px) calc(100vw - 28px), (max-width: 1024px) calc(100vw - 60px), calc((100vw - 392px) / 2)" alt="Luminous Labs Behance project cover" width="404" height="316" decoding="async" loading="lazy">
+              <figure class="project-card__media project-card__media--luminous">
+                <img class="project-card__poster" src="https://mir-s3-cdn-cf.behance.net/projects/808/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png" alt="" width="404" height="316" decoding="async" loading="lazy">
+                <video class="project-card__video" loop poster="https://mir-s3-cdn-cf.behance.net/projects/808/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png" muted playsinline autoplay preload="metadata" width="404" height="316" aria-label="Luminous Labs project preview video">
+                  <source src="https://player.vimeo.com/progressive_redirect/playback/1078324162/rendition/720p/file.mp4?loc=external&log_user=0&signature=3257849c5b0956a6d7d49120293abd1f02d67fc7a97c530cfe2d21e29f1b1f5d" type="video/mp4">
+                </video>
                 <img class="project-card__award" src="https://a5.behance.net/fa9e09740d93a6cee39da7f9d514597e7f04266e/img/galleries/icons/ribbons/1x/network.png?cb=264615658" srcset="https://a5.behance.net/fa9e09740d93a6cee39da7f9d514597e7f04266e/img/galleries/icons/ribbons/1x/network.png?cb=264615658 1x, https://a5.behance.net/fa9e09740d93a6cee39da7f9d514597e7f04266e/img/galleries/icons/ribbons/2x/network@2x.png?cb=264615658 2x" alt="Best of Behance" width="31" height="57" loading="lazy" decoding="async">
               </figure>
               <div class="project-card__meta">
@@ -689,7 +719,22 @@
         targets.forEach((img) => observer.observe(img));
       }
 
+      function initLuminousReveal() {
+        const media = document.querySelector(".project-card__media--luminous");
+        const video = media ? media.querySelector(".project-card__video") : null;
+        if (!media || !video) return;
+
+        const reveal = (delay = 0) => {
+          media.classList.remove("is-video-visible");
+          void media.offsetWidth;
+          window.setTimeout(() => media.classList.add("is-video-visible"), delay);
+        };
+
+        reveal(1000);
+      }
+
       window.addEventListener("hashchange", renderRoute);
+      initLuminousReveal();
       renderRoute();
     })();
   </script>
