@@ -227,15 +227,11 @@
       align-items: start;
     }
 
-    .project-card {
-      content-visibility: auto;
-      contain-intrinsic-size: 420px;
-    }
-
     .project-card__link {
       color: inherit;
       display: block;
       text-decoration: none;
+      min-width: 0;
     }
 
     .project-card__link:focus-visible {
@@ -248,7 +244,6 @@
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-lg);
-      aspect-ratio: 51 / 36;
       width: 100%;
       margin-bottom: 12px;
       box-shadow: var(--shadow-soft);
@@ -256,12 +251,9 @@
     }
 
     .project-card__media img:not(.project-card__award) {
-      position: absolute;
-      top: 0;
-      left: 0;
+      position: static;
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
     }
 
     .project-card__award {
@@ -279,6 +271,10 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 6px;
+    }
+
+    .project-card__meta > div {
+      min-width: 0;
     }
 
     .project-card__title {
@@ -377,6 +373,10 @@
         grid-template-columns: 1fr;
       }
 
+      .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       body.route-zenline .sidebar {
         display: none;
       }
@@ -387,34 +387,8 @@
 
       .sidebar {
         position: static;
-        top: auto;
-        left: auto;
-        width: auto;
-        height: auto;
-        overflow: visible;
-        min-height: 0;
+        display: block;
         padding: 0;
-        display: grid;
-        grid-template-columns: minmax(0, 280px) 1fr;
-        gap: 18px 28px;
-      }
-
-      .sidebar-top {
-        grid-column: 1;
-      }
-
-      .sidebar-bio {
-        grid-column: 2;
-        margin: 0;
-        max-width: 280px;
-      }
-
-      .sidebar-contacts {
-        grid-column: 1 / -1;
-        margin-top: 0;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 16px;
       }
 
       .content {
@@ -425,13 +399,22 @@
       .main-title {
         margin-top: 8px;
       }
+
+      .sidebar-bio {
+        max-width: none;
+        margin-top: 14px;
+        font-size: 17px;
+      }
+
+      .sidebar-contacts {
+        margin-top: 18px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
     }
 
     @media (max-width: 900px) {
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
       .zenline-intro {
         flex-direction: column;
         gap: 14px;
@@ -453,20 +436,8 @@
         gap: 24px;
       }
 
-      .sidebar {
-        display: block;
-        padding: 0;
-      }
-
-      .sidebar-bio {
-        max-width: none;
-        margin-top: 14px;
-        font-size: 17px;
-      }
-
-      .sidebar-contacts {
-        margin-top: 18px;
-        gap: 12px;
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
 
       .main-title {
@@ -549,7 +520,7 @@
           <article class="project-card">
             <a class="project-card__link" href="https://www.behance.net/gallery/240130525/Kinescope-20-Brand-Identity-Website" target="_blank" rel="noreferrer">
               <figure class="project-card__media">
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/38daba240130525.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/38daba240130525.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/38daba240130525.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 900px) calc(100vw - 28px), (max-width: 1024px) calc((100vw - 62px) / 2), calc((100vw - 392px) / 2)" alt="Kinescope 2.0 Behance project cover" width="404" height="316" decoding="async" fetchpriority="high">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/38daba240130525.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/38daba240130525.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/38daba240130525.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 720px) calc(100vw - 28px), (max-width: 1024px) calc(100vw - 60px), calc((100vw - 392px) / 2)" alt="Kinescope 2.0 Behance project cover" width="404" height="316" decoding="async" fetchpriority="high">
               </figure>
               <div class="project-card__meta">
                 <div>
@@ -564,7 +535,7 @@
           <article class="project-card">
             <a class="project-card__link" href="https://www.behance.net/gallery/215296101/Luminous-Labs-Brand-Identity-Website" target="_blank" rel="noreferrer">
               <figure class="project-card__media">
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 900px) calc(100vw - 28px), (max-width: 1024px) calc((100vw - 62px) / 2), calc((100vw - 392px) / 2)" alt="Luminous Labs Behance project cover" width="404" height="316" decoding="async" loading="lazy">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/da8d88215296101.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 720px) calc(100vw - 28px), (max-width: 1024px) calc(100vw - 60px), calc((100vw - 392px) / 2)" alt="Luminous Labs Behance project cover" width="404" height="316" decoding="async" loading="lazy">
                 <img class="project-card__award" src="https://a5.behance.net/fa9e09740d93a6cee39da7f9d514597e7f04266e/img/galleries/icons/ribbons/1x/network.png?cb=264615658" srcset="https://a5.behance.net/fa9e09740d93a6cee39da7f9d514597e7f04266e/img/galleries/icons/ribbons/1x/network.png?cb=264615658 1x, https://a5.behance.net/fa9e09740d93a6cee39da7f9d514597e7f04266e/img/galleries/icons/ribbons/2x/network@2x.png?cb=264615658 2x" alt="Best of Behance" width="31" height="57" loading="lazy" decoding="async">
               </figure>
               <div class="project-card__meta">
@@ -580,7 +551,7 @@
           <article class="project-card">
             <a class="project-card__link" href="https://www.behance.net/gallery/208382331/Monite-Brand-Identity-Website" target="_blank" rel="noreferrer">
               <figure class="project-card__media">
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/af7179208382331.Y3JvcCwzMjMyLDI1MjgsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/af7179208382331.Y3JvcCwzMjMyLDI1MjgsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/af7179208382331.Y3JvcCwzMjMyLDI1MjgsMCww.png 808w" sizes="(max-width: 900px) calc(100vw - 28px), (max-width: 1024px) calc((100vw - 62px) / 2), calc((100vw - 392px) / 2)" alt="Monite Behance project cover" width="404" height="316" decoding="async" fetchpriority="high">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/af7179208382331.Y3JvcCwzMjMyLDI1MjgsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/af7179208382331.Y3JvcCwzMjMyLDI1MjgsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/af7179208382331.Y3JvcCwzMjMyLDI1MjgsMCww.png 808w" sizes="(max-width: 720px) calc(100vw - 28px), (max-width: 1024px) calc(100vw - 60px), calc((100vw - 392px) / 2)" alt="Monite Behance project cover" width="404" height="316" decoding="async" fetchpriority="high">
               </figure>
               <div class="project-card__meta">
                 <div>
@@ -595,7 +566,7 @@
           <article class="project-card">
             <a class="project-card__link" href="https://www.behance.net/gallery/187335315/Levenue-Brand-Identity-Website" target="_blank" rel="noreferrer">
               <figure class="project-card__media">
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/e64654187335315.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/e64654187335315.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/e64654187335315.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 900px) calc(100vw - 28px), (max-width: 1024px) calc((100vw - 62px) / 2), calc((100vw - 392px) / 2)" alt="Levenue Behance project cover" width="404" height="316" loading="lazy" decoding="async">
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/e64654187335315.Y3JvcCwxNjE2LDEyNjQsMCww.png" srcset="https://mir-s3-cdn-cf.behance.net/projects/404/e64654187335315.Y3JvcCwxNjE2LDEyNjQsMCww.png 404w, https://mir-s3-cdn-cf.behance.net/projects/808/e64654187335315.Y3JvcCwxNjE2LDEyNjQsMCww.png 808w" sizes="(max-width: 720px) calc(100vw - 28px), (max-width: 1024px) calc(100vw - 60px), calc((100vw - 392px) / 2)" alt="Levenue Behance project cover" width="404" height="316" loading="lazy" decoding="async">
               </figure>
               <div class="project-card__meta">
                 <div>
